@@ -39,7 +39,7 @@ import com.thoughtworks.xstream.io.xml.Dom4JDriver;
  * (http://localhost:3000/v1/) or inside a servlet container
  * (http://localhost:8080/v1/).
  * 
- * @author Chatchai Pimtun (Admin)
+ *  
  */
 public class Main {
 
