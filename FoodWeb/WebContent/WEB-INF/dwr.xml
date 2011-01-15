@@ -6,18 +6,12 @@
  
 
     <!-- intro - for the test on index.html  -->
-    <create creator="new" javascript="PersonalPageAjax">
-      <param name="class" value="th.or.ntc.personalpage.ajax.PersonalPageAjax"/>
+    <create creator="new" javascript="FoodAjax">
+      <param name="class" value="th.co.food.web.ajax.FoodAjax"/>
     </create>
 
-     <convert match="th.or.ntc.xstream.common.VResultMessage" converter="bean"/> 
-     <convert match="th.or.ntc.xstream.NtcPersonalPicture" converter="bean"/>
-     <convert match="th.or.ntc.utils.Pagging" converter="bean"/>
- 	 <convert match="th.or.ntc.criteria.VCriteria" converter="bean"/>
- <!--	
-     <convert match="th.or.ntc.xstream.NtcGocRocCertificate" converter="bean"/>
- 	 <convert match="th.or.ntc.utils.Pagging" converter="bean"/>
- 	 <convert match="th.or.ntc.criteria.VCriteria" converter="bean"/>
- 	 --> 
+     <convert converter="exception" match="java.lang.Exception"/>
+    <convert converter="bean" match="java.lang.StackTraceElement"/>
+    <convert converter="bean" match="th.co.food.dto.FoodMenuDTO"/> 
   </allow>
 </dwr>
