@@ -5,7 +5,7 @@ import org.restlet.Restlet;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 /**
- * @author Chatchai Pimtun (Admin)
+ * 
  *
  */
 public class CommonResourceApplication extends Application {

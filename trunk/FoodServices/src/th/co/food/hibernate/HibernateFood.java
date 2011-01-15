@@ -205,6 +205,7 @@ FoodOrder.java
 			Criteria criteria 	= (Criteria) session.createCriteria("th.co.food.domain.FoodMenu"); 
 			
 			Integer fbId = instance.getFbId();
+			//instance.getf
 		//	FoodOrder foodOrder = instance.ggetFoodOrder();
 			
 			boolean iscriteria = false;
