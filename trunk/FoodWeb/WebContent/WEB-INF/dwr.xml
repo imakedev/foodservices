@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 2.0//EN" "http://getahead.org/dwr/dwr20.dtd">
+<dwr>
+
+  <allow>
+ 
+
+    <!-- intro - for the test on index.html  -->
+    <create creator="new" javascript="PersonalPageAjax">
+      <param name="class" value="th.or.ntc.personalpage.ajax.PersonalPageAjax"/>
+    </create>
+
+     <convert match="th.or.ntc.xstream.common.VResultMessage" converter="bean"/> 
+     <convert match="th.or.ntc.xstream.NtcPersonalPicture" converter="bean"/>
+     <convert match="th.or.ntc.utils.Pagging" converter="bean"/>
+ 	 <convert match="th.or.ntc.criteria.VCriteria" converter="bean"/>
+ <!--	
+     <convert match="th.or.ntc.xstream.NtcGocRocCertificate" converter="bean"/>
+ 	 <convert match="th.or.ntc.utils.Pagging" converter="bean"/>
+ 	 <convert match="th.or.ntc.criteria.VCriteria" converter="bean"/>
+ 	 --> 
+  </allow>
+</dwr>
