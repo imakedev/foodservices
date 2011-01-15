@@ -2,6 +2,38 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<script type="text/javascript"
+        src='<%= request.getContextPath()%>/dwr/interface/FoodAjax.js'> 
+</script>
+<script type="text/javascript"
+        src='<%= request.getContextPath() %>/dwr/engine.js'> 
+</script>
+<script type="text/javascript"
+        src='<%= request.getContextPath() %>/dwr/util.js'>
+</script>
+<script>
+function getFoodMenus(foodDto){
+	//alert(userId);
+	FoodAjax.getMenuList(foodDto,handleGetFoodMenus);
+	//alert(userId);
+}
+function handleGetFoodMenus(dataList){
+	alert(dataList[0].fmDetail);
+}
+function selectFoodMenu(fmId){
+	//alert(userId);
+	var foodDto ={
+			fmId:fmId
+	};
+	FoodAjax.getMenuList(foodDto,handleSelectFoodMenu);
+	//alert(userId);
+}
+function handleSelectFoodMenu(dataList){
+	alert(dataList[0].fmDetail);
+}
+ 
+
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Untitled Document</title>
 </head>
@@ -25,6 +57,7 @@
         <td rowspan="5">รายการอาหาร</td>
         <td>รายการที่1</td>
       </tr>
+      
       <tr>
         <td>&nbsp;</td>
         <td>รายการที่2</td>
@@ -105,5 +138,11 @@
     </table></td>
   </tr>
 </table>
+<script>
+var foodDto ={
+		fmStatus:"1"
+};
+getFoodMenus(foodDto);
+</script>
 </body>
 </html>

@@ -1,4 +1,8 @@
 package th.co.food.web.service;
+
+import java.util.List;
+
+import th.co.food.dto.FoodMenuDTO;
  
 
 /**
@@ -6,6 +10,7 @@ package th.co.food.web.service;
  *
  */
 public interface  FoodService {
+	public List getFoodMenu(FoodMenuDTO foodMenuDTO);
 	/*public NtcFaq getNtcFaq(String key);  
 	public int addNtcFaq(NtcFaq ntcFaq); 
 	public void saveNtcFaq(NtcFaq ntcFaq);

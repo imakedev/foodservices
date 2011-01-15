@@ -1,5 +1,8 @@
 package th.co.food.web.service.impl;
 
+import java.util.List;
+
+import th.co.food.dto.FoodMenuDTO;
 import th.co.food.web.service.FoodService;
  
 /**
@@ -7,6 +10,13 @@ import th.co.food.web.service.FoodService;
  *
  */
 public class FoodServiceImpl extends FoodPostCommon implements FoodService {
+
+	public List getFoodMenu(FoodMenuDTO foodMenuDTO) {
+		// TODO Auto-generated method stub
+		//return null;
+		foodMenuDTO.setServiceName("searchFoodMenu");
+		return (List) postMessage(foodMenuDTO,foodMenuDTO.getClass(),foodMenuDTO.getClass(),"/foods",true);
+	}
 	
 	/*
 
@@ -91,12 +101,15 @@ public class FoodServiceImpl extends FoodPostCommon implements FoodService {
 		VResultMessage  vresultMessage = postMessage(approvalGroup,approvalGroup.getClass().getName(),"radioapprovalgroups/",true);		
 		return (NtcRadioApprovalGroup)vresultMessage.getResultListObj().get(0);
 	}
-
+/*
+ * 
+ */
 	public static void main(String[] args) {
 		FoodServiceImpl service = new FoodServiceImpl();	
+		System.out.println(service.getFoodMenu(new FoodMenuDTO()));
 		//VResultMessage v = service.searchNtcFaqMessage(new NtcFaqMessage());
 		
-		NtcFaq faq = new NtcFaq();
+		/*NtcFaq faq = new NtcFaq();
 		NtcFaqMessage ntcFaqMessage = new NtcFaqMessage();
 		ntcFaqMessage.setNfaqId("9");
 		ntcFaqMessage.setNfaqMId("2");
@@ -120,6 +133,7 @@ public class FoodServiceImpl extends FoodPostCommon implements FoodService {
 		//faq.setServiceName(ServiceConstant.FAQ_UPDATE);
 		//VResultMessage v = service.saveNtcFaq(ntcFaq)searchNtcFaq(faq);
 		//System.out.println(v.getResultListObj());
+		 */
 	}
-*/
+ 
 }

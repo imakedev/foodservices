@@ -17,18 +17,18 @@ import com.thoughtworks.xstream.io.xml.Dom4JDriver;
 
 public class FoodPostCommon {
 	public static final int PAGE_SIZE = 5; 
-	public Object  postMessage(Object serviceXML,String className,Class classReturn,String endPoint,boolean isReturn) {
-	    HttpPost httppost = new HttpPost("http://localhost:8081/NTCServices/RestletServlet/"+endPoint); 
+	public Object  postMessage(Object serviceXML,Class className,Class classReturn,String endPoint,boolean isReturn) {
+	    HttpPost httppost = new HttpPost("http://localhost:3000/v1"+endPoint); 
 	    //HttpPost httppost = new HttpPost("http://localhost:8081/NTCServices/RestletServlet/"+endPoint);
 		XStream xstream = new XStream(new Dom4JDriver());
-		Class c  = null;
+	/*	Class c  = null;
 		try {
 			  c = Class.forName(className);
 		} catch (ClassNotFoundException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
-		}
-		xstream.processAnnotations(c);
+		}*/
+		xstream.processAnnotations(className);
 		//vserviceXML
 		//NtcFaq ntcFaq = (NtcFaq)vserviceXML;
 		int startIndex = 0;
