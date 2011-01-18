@@ -30,7 +30,8 @@ public class FoodMenuDTO extends BaseDTO  implements Serializable {
 	@XStreamAlias("fmPrice")
 	private Float fmPrice;
 
- 
+	@XStreamAlias("fmStatus")
+	private String fmStatus;
 
 	public Integer getFmId() {
 		return fmId;
@@ -86,6 +87,14 @@ public class FoodMenuDTO extends BaseDTO  implements Serializable {
 
 	public void setFmPrice(Float fmPrice) {
 		this.fmPrice = fmPrice;
+	}
+
+	public String getFmStatus() {
+		return fmStatus;
+	}
+
+	public void setFmStatus(String fmStatus) {
+		this.fmStatus = fmStatus;
 	}
 
 	

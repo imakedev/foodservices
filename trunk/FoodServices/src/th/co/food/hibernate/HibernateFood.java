@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Expression;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import th.co.food.domain.FoodBill;
+import th.co.food.domain.FoodCustomer;
 import th.co.food.domain.FoodMenu;
 import th.co.food.domain.FoodOrder;
 import th.co.food.service.FoodService;
@@ -193,6 +195,25 @@ FoodOrder.java
 			}
 		return returnId;	
 	}
+	@Transactional(propagation = Propagation.REQUIRES_NEW,rollbackFor={RuntimeException.class})
+	public Integer saveFoodCustomer(FoodCustomer transientInstance) throws DataAccessException {
+		// TODO Auto-generated method stub
+		
+		Session  session = sessionAnnotationFactory.getCurrentSession();
+		Integer returnId  = null;
+		try{
+			Object obj = session.save(transientInstance);
+		
+			if(obj!=null){
+				returnId =(Integer) obj;
+			}
+			} finally {
+				if (session != null) {
+					session = null;
+				} 
+			}
+		return returnId;	
+	}
 	@Transactional(readOnly=true)
 	public List searchFoodBill(FoodBill instance)
 			throws DataAccessException {
@@ -247,7 +268,7 @@ FoodOrder.java
 			Integer fmId = instance.getFmId();
 			String fmName = instance.getFmName();
 			String fmDetail = instance.getFmDetail();
-			
+			String fmStatus = instance.getFmStatus();
 			boolean iscriteria = false;
 			boolean  isSelectAll = false;
 		
@@ -263,7 +284,11 @@ FoodOrder.java
 			if(fmDetail !=null && !"".equals(fmDetail) && !" ".equals(fmDetail)){ 
 				 criteria.add(Expression.eq("fmDetail", fmDetail));	
 				iscriteria = true;
-			} 	
+			} 
+			if(fmStatus !=null && !"".equals(fmStatus) && !" ".equals(fmStatus)){ 
+				 criteria.add(Expression.eq("fmStatus", fmStatus));	
+				iscriteria = true;
+			} 
 			//criteria.addOrder(Order.asc("nfaqId")); 
 		 
 			 List l = criteria.list(); 
@@ -326,6 +351,44 @@ FoodOrder.java
 		}
 		return null;
 	}
+	@Transactional(readOnly=true)
+	public List searchFoodCustomer(FoodCustomer instance)	throws DataAccessException {
+		// TODO Auto-generated method stub
+		 
+		ArrayList  transList = new ArrayList ();
+		Session session = null;
+		try {
+			session = sessionAnnotationFactory.getCurrentSession();
+			Criteria criteria 	= (Criteria) session.createCriteria("th.co.food.domain.FoodCustomer"); 
+			
+			Integer fcId = instance.getFcId();
+		 
+			boolean iscriteria = false;
+			boolean  isSelectAll = false;
+		
+			 if(fcId !=null && fcId.intValue()!=0){  
+				  criteria.add(Expression.eq("fcId",  fcId));
+				  iscriteria = true;
+			 } 
+			 
+		 
+			//criteria.addOrder(Order.asc("nfaqId")); 
+		 
+			 List l = criteria.list(); 
+		  
+			transList.add(l);
+			 
+		 	transList.add(l.size()+""); 
+			 
+		
+			return transList;
+		} catch (Exception re) { 
+			re.printStackTrace();
+			 
+		}
+		return null;
+	
+	}
 	 @Transactional(propagation = Propagation.REQUIRES_NEW,rollbackFor={RuntimeException.class})
 	public int updateFoodBill(FoodBill transientInstance)
 			throws DataAccessException {
@@ -379,5 +442,44 @@ FoodOrder.java
 						} 
 					}
 					return canUpdate;
-		} 
+		}	
+	 @Transactional(propagation = Propagation.REQUIRES_NEW,rollbackFor={RuntimeException.class})
+	 public void orderMenus(FoodBill foodBill,ArrayList foodOrders) {
+			// TODO Auto-generated method stub
+		 // save FoodBill 
+		 Session  session = sessionAnnotationFactory.getCurrentSession();
+			Integer returnId  = null;
+			try{
+				Object obj = session.save(foodBill);
+			
+				if(obj!=null){
+					returnId =(Integer) obj;
+					foodBill.setFbId(returnId);
+					// save Food Order
+					 if(foodOrders!=null){
+						 
+						 for (int i = 0; i < foodOrders.size(); i++) {
+							 FoodOrder foodOrder = (FoodOrder)foodOrders.get(i);
+							 foodOrder.setFoodBill(foodBill);
+							 session.save(foodOrder);
+						//	 foodOrder.setFoodMenu(foodMenu);
+							System.out.println("foodOrders="+foodOrders.get(i));
+						}
+					 }
+				}
+				} finally {
+					if (session != null) {
+						session = null;
+					} 
+				} 
+		}
+	 @Transactional(propagation = Propagation.REQUIRES_NEW,rollbackFor={RuntimeException.class})
+	public void setMenuStatus(FoodMenu persistentInstance) {
+		// TODO Auto-generated method stub
+		 Session  session = sessionAnnotationFactory.getCurrentSession();
+		 Query query= session.createQuery("update FoodMenu foodMenu set foodMenu.fmStatus =? where foodMenu.fmId =?");
+		 query.setParameter(0, persistentInstance.getFmStatus());
+		 query.setParameter(1, persistentInstance.getFmId());
+		 query.executeUpdate();
+	} 
 }

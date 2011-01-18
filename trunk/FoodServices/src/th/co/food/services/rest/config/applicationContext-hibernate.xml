@@ -57,6 +57,7 @@
 				<value>th.co.food.domain.FoodBill</value>
 				<value>th.co.food.domain.FoodMenu</value>
 				<value>th.co.food.domain.FoodOrder</value> 
+				<value>th.co.food.domain.FoodCustomer</value> 
 			</list>
    		</property>
    		<property name="eventListeners">

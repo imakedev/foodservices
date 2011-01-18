@@ -42,6 +42,9 @@ public class FoodMenu implements Serializable {
 	@Column(name="FM_PRICE")
 	private Float fmPrice;
 
+	@Column(name="FM_STATUS")
+	private String fmStatus;
+	
 	public Integer getFmId() {
 		return fmId;
 	}
@@ -96,6 +99,14 @@ public class FoodMenu implements Serializable {
 
 	public void setFmPrice(Float fmPrice) {
 		this.fmPrice = fmPrice;
+	}
+
+	public String getFmStatus() {
+		return fmStatus;
+	}
+
+	public void setFmStatus(String fmStatus) {
+		this.fmStatus = fmStatus;
 	}
 
 }

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -20,8 +21,14 @@ import org.restlet.resource.ServerResource;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+import th.co.food.domain.FoodBill;
+import th.co.food.domain.FoodCustomer;
 import th.co.food.domain.FoodMenu;
+import th.co.food.domain.FoodOrder;
+import th.co.food.dto.FoodBillDTO;
+import th.co.food.dto.FoodCustomerDTO;
 import th.co.food.dto.FoodMenuDTO;
+import th.co.food.dto.FoodOrderDTO;
 import th.co.food.dto.ResultDTO;
 import th.co.food.dto.ResultMessage;
 import th.co.food.service.FoodService;
@@ -57,6 +64,7 @@ public class FoodsResource  extends ServerResource {
 	public org.restlet.representation.Representation acceptContact(
 			org.restlet.representation.Representation entity)
 			throws ResourceException {
+		System.out.println("into Post");
 		InputStream in = null;
 		ResultDTO resultDTO= null;
 		try { 
@@ -68,9 +76,14 @@ public class FoodsResource  extends ServerResource {
 			} 
 			String serviceName = "";
 			serviceName = baseDTO.getServiceName();  
+			System.out.println("servicename="+serviceName);
 			if("searchFoodMenu".equals(serviceName)){
 				resultDTO = new ResultDTO();
-				FoodMenu foodMenu =new FoodMenu(); 
+				FoodMenuDTO foodMenuDTO =(FoodMenuDTO)baseDTO;
+				
+				FoodMenu foodMenu =new FoodMenu();
+				foodMenu.setFmId(foodMenuDTO.getFmId());
+				foodMenu.setFmStatus(foodMenuDTO.getFmStatus());
 				List list = foodService.searchFoodMenu(foodMenu);
 				if(list!=null && list.size()>0){
 					List l = (List) list.get(0);
@@ -90,7 +103,118 @@ public class FoodsResource  extends ServerResource {
 					}
 					resultDTO.setResultList(result);
 				}
-			} 
+			}else if("orderMenus".equals(serviceName)){
+			//	foodService.orderMenus(foodMenus);
+				FoodBillDTO foodBillDTO =(FoodBillDTO)baseDTO;
+				FoodBill  foodBill = new FoodBill();
+				Date now =new Date();
+				foodBill.setFbBillDate(now);
+			//	foodBill.setFbBillTime(fbBillTime)BillDate(now);
+				foodBill.setFbTotalCalories(foodBillDTO.getFbTotalCalories());
+				foodBill.setFbTotalPrice(foodBillDTO.getFbTotalPrice());
+				foodBill.setFbTotalQuantity(foodBillDTO.getFbTotalQuantity());
+				foodBill.setFbStatus(foodBillDTO.getFbStatus());
+				if(foodBillDTO.getFoodOrders()!=null && foodBillDTO.getFoodOrders().length>0){
+					FoodOrderDTO[] list  = foodBillDTO.getFoodOrders();
+					int size = list.length;
+				//	System.out.println("foodOrder size="+size);
+					ArrayList foodOrders = new ArrayList(size); 
+					for (int i = 0; i < size; i++) {
+						//foodBillDTO.getListObj()
+						FoodOrder  foodOrder = new FoodOrder();
+						FoodMenu foodMenu = new FoodMenu();
+						//System.out.println("[ aoe debug]="+list[i].toString());
+						FoodOrderDTO foodOrderDTO =list[i];
+						FoodMenuDTO foodMenuDTO = foodOrderDTO.getFoodMenuDTO();
+						// copy FoodMenuDTO to FoodMenu
+						// foodMenuDTO ==> foodMenu
+						System.out.println(foodMenuDTO.getFmId());
+						 foodMenu.setFmId(foodMenuDTO.getFmId());
+					
+						foodOrder.setFoodBill(foodBill);
+						foodOrder.setFoodMenu(foodMenu);
+						foodOrder.setFoStatus(foodOrderDTO.getFoStatus());
+						//foodOrder.setFoPhoneNumber(foodOrderDTO.getFoPhoneNumber());
+						foodOrder.setFoQuantity(foodOrderDTO.getFoQuantity());
+						foodOrder.setFoTotalCalories(foodOrderDTO.getFoTotalCalories());
+						foodOrder.setFoTotalPrice(foodOrderDTO.getFoTotalPrice());
+						foodOrders.add(foodOrder); 
+					}
+					foodService.orderMenus(foodBill, foodOrders);
+				}
+				//foodService.orderMenus(foodOrderDTO.getListObj());
+			}else if("searchFoodOrder".equals(serviceName)){
+
+				resultDTO = new ResultDTO();
+				FoodOrderDTO foodOrderDTO =(FoodOrderDTO)baseDTO;
+				
+				FoodOrder foodOrder =new FoodOrder();
+			/*	foodOrder.setFmId(foodOrderDTO.getFmId());
+				foodOrder.setFmStatus(foodOrderDTO.getFmStatus());*/
+				List list = foodService.searchFoodOrder(foodOrder);
+				if(list!=null && list.size()>0){
+					List l = (List) list.get(0);
+					int size = l.size();
+					ArrayList result = new ArrayList(size);
+					for (int i = 0; i < size; i++) {
+						FoodOrderDTO dto =new FoodOrderDTO(); 
+						FoodOrder order =(FoodOrder)l.get(i);
+						/*dto.setFmId(menu.getFmId());
+						dto.setFmCalories(menu.getFmCalories());
+						dto.setFmDetail(menu.getFmDetail());
+						dto.setFmPrice(menu.getFmPrice());
+						dto.setFmName(menu.getFmName());
+						dto.setFmPictureName(menu.getFmPictureName());
+						dto.setFmPicturePath(menu.getFmPicturePath());*/
+						result.add(dto);
+					}
+					resultDTO.setResultList(result);
+				}
+			
+			}else if("setMenuStatus".equals(serviceName)){
+				resultDTO = new ResultDTO();
+				FoodMenuDTO foodMenuDTO =(FoodMenuDTO)baseDTO;
+				
+				FoodMenu foodMenu =new FoodMenu();
+				foodMenu.setFmId(foodMenuDTO.getFmId());
+				foodMenu.setFmStatus(foodMenuDTO.getFmStatus());
+				  foodService.setMenuStatus(foodMenu);
+			}else if("addCustomer".equals(serviceName)){
+				resultDTO = new ResultDTO();
+				FoodCustomerDTO foodCustomerDTO =(FoodCustomerDTO)baseDTO;
+				FoodCustomer foodCustomer = new FoodCustomer();
+				foodCustomer.setFcId(foodCustomerDTO.getFcId()); 
+				foodCustomer.setFcBirthDay(foodCustomerDTO.getFcBirthDay());
+				foodCustomer.setFcMoney(foodCustomerDTO.getFcMoney());
+				foodCustomer.setFcName(foodCustomerDTO.getFcName());
+				foodCustomer.setFcSurName(foodCustomerDTO.getFcSurName());
+				foodService.saveFoodCustomer(foodCustomer);
+				
+			}else if("searchFoodCustomer".equals(serviceName)){
+				resultDTO = new ResultDTO();
+				FoodCustomerDTO foodCustomerDTO =(FoodCustomerDTO)baseDTO;
+				
+				FoodCustomer foodCustomer =new FoodCustomer();
+				foodCustomer.setFcId(foodCustomerDTO.getFcId());
+				//foodCustomer.setFmStatus(foodCustomerDTO.getFmStatus());
+				List list = foodService.searchFoodCustomer(foodCustomer);
+				if(list!=null && list.size()>0){
+					List l = (List) list.get(0);
+					int size = l.size();
+					ArrayList result = new ArrayList(size);
+					for (int i = 0; i < size; i++) {
+						FoodCustomerDTO dto =new FoodCustomerDTO(); 
+						FoodCustomer cust =(FoodCustomer)l.get(i);
+						dto.setFcId(cust.getFcId());
+						dto.setFcBirthDay(cust.getFcBirthDay());
+						dto.setFcMoney(cust.getFcMoney());
+						dto.setFcName(cust.getFcName());
+						dto.setFcSurName(cust.getFcSurName()); 
+						result.add(dto);
+					}
+					resultDTO.setResultList(result);
+				}
+			}
 			
 			if (resultDTO != null) {
 				ResultMessage vresultMessage = new ResultMessage();
@@ -113,6 +237,7 @@ public class FoodsResource  extends ServerResource {
 	@Get
 	public org.restlet.representation.Representation represent() throws ResourceException { 
 		ResultDTO resultDTO= null;
+		System.out.println("into Get");
 		FoodMenu foodMenu =new FoodMenu(); 
 		List list = foodService.searchFoodMenu(foodMenu);
 		if(list!=null && list.size()>0){

@@ -44,6 +44,18 @@ public class FoodBill implements Serializable {
 	@Column(name="FB_TOTAL_QUANTITY")
 	private Integer fbTotalQuantity;
 
+	@Column(name="FB_STATUS")
+	private String fbStatus;
+	
+	
+	public String getFbStatus() {
+		return fbStatus;
+	}
+
+	public void setFbStatus(String fbStatus) {
+		this.fbStatus = fbStatus;
+	}
+
 	public Integer getFbId() {
 		return fbId;
 	}

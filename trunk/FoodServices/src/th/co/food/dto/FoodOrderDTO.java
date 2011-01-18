@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import th.co.food.domain.FoodBill;
-import th.co.food.domain.FoodMenu;
-
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 @XStreamAlias("foodOrderDTO")
 public class FoodOrderDTO  extends BaseDTO  implements Serializable {
@@ -21,9 +18,9 @@ public class FoodOrderDTO  extends BaseDTO  implements Serializable {
 
 	@XStreamAlias("foOrderTime")
 	private Timestamp foOrderTime;
-
+/*
 	@XStreamAlias("foPhoneNumber")
-	private String foPhoneNumber;
+	private String foPhoneNumber;*/
 
 	@XStreamAlias("foQuantity")
 	private Integer foQuantity;
@@ -34,13 +31,17 @@ public class FoodOrderDTO  extends BaseDTO  implements Serializable {
 	@XStreamAlias("foTotalPrice")
 	private Float foTotalPrice;
 
+	@XStreamAlias("foStatus")
+	private String foStatus;
+	
 	@XStreamAlias("foodBill")
-	private FoodBill foodBill;
+	private FoodBillDTO FoodBillDTO;
 
 	@XStreamAlias("foodMenu")
-	private FoodMenu foodMenu;
+	private FoodMenuDTO FoodMenuDTO;
 
- 
+	@XStreamAlias("foodCustomer")
+	private FoodCustomerDTO foodCustomerDTO;
 
 	public Integer getFoId() {
 		return foId;
@@ -66,13 +67,13 @@ public class FoodOrderDTO  extends BaseDTO  implements Serializable {
 		this.foOrderTime = foOrderTime;
 	}
 
-	public String getFoPhoneNumber() {
+/*	public String getFoPhoneNumber() {
 		return foPhoneNumber;
 	}
 
 	public void setFoPhoneNumber(String foPhoneNumber) {
 		this.foPhoneNumber = foPhoneNumber;
-	}
+	}*/
 
 	public Integer getFoQuantity() {
 		return foQuantity;
@@ -98,21 +99,39 @@ public class FoodOrderDTO  extends BaseDTO  implements Serializable {
 		this.foTotalPrice = foTotalPrice;
 	}
 
-	public FoodBill getFoodBill() {
-		return foodBill;
+	public FoodBillDTO getFoodBillDTO() {
+		return FoodBillDTO;
 	}
 
-	public void setFoodBill(FoodBill foodBill) {
-		this.foodBill = foodBill;
+	public void setFoodBillDTO(FoodBillDTO foodBillDTO) {
+		FoodBillDTO = foodBillDTO;
 	}
 
-	public FoodMenu getFoodMenu() {
-		return foodMenu;
+	public FoodMenuDTO getFoodMenuDTO() {
+		return FoodMenuDTO;
 	}
 
-	public void setFoodMenu(FoodMenu foodMenu) {
-		this.foodMenu = foodMenu;
+	public void setFoodMenuDTO(FoodMenuDTO foodMenuDTO) {
+		FoodMenuDTO = foodMenuDTO;
 	}
 
-    
+	public FoodCustomerDTO getFoodCustomerDTO() {
+		return foodCustomerDTO;
+	}
+
+	public void setFoodCustomerDTO(FoodCustomerDTO foodCustomerDTO) {
+		this.foodCustomerDTO = foodCustomerDTO;
+	}
+
+	public String getFoStatus() {
+		return foStatus;
+	}
+
+	public void setFoStatus(String foStatus) {
+		this.foStatus = foStatus;
+	}
+	
+	
+
+	 
 }

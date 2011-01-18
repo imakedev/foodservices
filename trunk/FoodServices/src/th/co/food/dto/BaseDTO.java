@@ -1,6 +1,7 @@
 package th.co.food.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
@@ -19,6 +20,9 @@ public class BaseDTO implements Serializable {
 	@XStreamAlias("orderBy")
 	private String orderBy;
 	
+	@XStreamAlias("listObj") 
+	private ArrayList listObj;
+	
 	public String getOrderBy() {
 		return orderBy;
 	}
@@ -35,6 +39,13 @@ public class BaseDTO implements Serializable {
 		this.serviceName = serviceName;
 	}
 
-	 
-	
+	public ArrayList getListObj() {
+		return listObj;
+	}
+
+	public void setListObj(ArrayList listObj) {
+		this.listObj = listObj;
+	}
+
+ 
 }
