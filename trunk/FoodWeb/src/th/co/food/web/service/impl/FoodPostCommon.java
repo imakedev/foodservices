@@ -12,6 +12,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import th.co.food.dto.ResultMessage;
+
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.Dom4JDriver;
 
@@ -29,6 +31,7 @@ public class FoodPostCommon {
 			e2.printStackTrace();
 		}*/
 		xstream.processAnnotations(className);
+		xstream.processAnnotations(ResultMessage.class);
 		//vserviceXML
 		//NtcFaq ntcFaq = (NtcFaq)vserviceXML;
 		int startIndex = 0;

@@ -4,16 +4,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Untitled Document</title>
-<script src="Scripts/AC_RunActiveContent.js" type="text/javascript"></script>
+
 </head>
 
 <body>
-<table width="1032" border="1" background="image/พื้นหลัง.jpg">
+<table width="1032" border="1" background="image/bg.jpg">
   <tr>
     <td width="1030"><img src="image/title1.jpg" width="1024" height="195" /></td>
   </tr>
   <tr>
-    <td height="315"><table width="1028" height="272" border="1" background="image/พื้นหลัง2.jpg">
+    <td height="315"><table width="1028" height="272" border="1" background="image/bg1.jpg">
       <tr>
         <td width="106">&nbsp;</td>
         <td width="351">&nbsp;</td>
@@ -22,7 +22,7 @@
       </tr>
       <tr>
         <td height="32">&nbsp;</td>
-        <td rowspan="6" valign="top" background="image/พื้นหลัง.gif"><table width="200" border="1">
+        <td rowspan="6" valign="top" background="image/bgorder.gif"><table width="200" border="1">
             <tr>
               <td valign="top">&nbsp;</td>
             </tr>
@@ -47,22 +47,24 @@
               <td width="112">กรัม</td>
             </tr>
           </table></td>
-        <td rowspan="5"><img src="image/รายการหาร.gif" width="175" height="191" /></td>
-        <td rowspan="5" valign="top"><table width="420" border="1">
+        <td rowspan="5"><img src="image/order.gif" width="175" height="191" /></td>
+        <td rowspan="5" valign="top">
+        <table width="420" border="1">
+        <div id="orderDiv"></div>
           <tr>
-            <td><div align="center"><img src="image/รายการอาหารที่หนึ่ง.gif" width="250" height="44" /></div></td>
+            <td><div align="center"><img src="image/order1.gif" width="250" height="44" /></div></td>
           </tr>
           <tr>
-            <td><div align="center"><img src="image/รายการอาหารที่สอง.gif" width="250" height="44" /></div></td>
+            <td><div align="center"><img src="image/order2.gif" width="250" height="44" /></div></td>
           </tr>
           <tr>
-            <td><div align="center"><img src="image/รายการอาหารที่3.gif" width="250" height="44" /></div></td>
+            <td><div align="center"><img src="image/order3.gif" width="250" height="44" /></div></td>
           </tr>
           <tr>
-            <td><div align="center"><img src="image/รายการอาหารที่4.gif" width="250" height="44" /></div></td>
+            <td><div align="center"><img src="image/order4.gif" width="250" height="44" /></div></td>
           </tr>
           <tr>
-            <td><div align="center"><img src="image/รายการอาหารที่5.gif" width="250" height="44" /></div></td>
+            <td><div align="center"><img src="image/order5.gif" width="250" height="44" /></div></td>
           </tr>
         </table></td>
       </tr>
@@ -85,7 +87,7 @@
       </tr>
       <tr>
         <td height="23">&nbsp;</td>
-        <td colspan="3"><div align="center"><img src="image/เลือกรายการอาหาร.gif" width="250" height="44" /></div></td>
+        <td colspan="3"><div align="center"><img src="image/selectorder.gif" width="250" height="44" /></div></td>
         </tr>
     </table></td>
   </tr>
@@ -105,7 +107,7 @@
         <td>&nbsp;</td>
         <td><div align="center">
           <form id="form3" name="form3" method="post" action="">
-            <label><img src="image/ยกเลิก.gif" width="31" height="31" /></label>
+            <label><img src="image/cancel.gif" width="31" height="31" /></label>
           </form>
           </div></td>
       </tr>
@@ -125,12 +127,12 @@
         <td width="250"><div align="center">
           <form id="form1" name="form1" method="post" action="">
             <label></label>
-            <img src="image/สั่งอาหาร.gif" width="250" height="44" />
+            <img src="image/cusorder.gif" width="250" height="44" />
           </form>
           </div></td>
         <td width="250"><div align="center">
           <form id="form2" name="form2" method="post" action="">
-            <label><img src="image/ยกเลิกการสั่ง.gif" width="250" height="44" />              </label>
+            <label><img src="image/cancelorder.gif" width="250" height="44" />              </label>
           </form>
           </div></td>
         <td width="248">&nbsp;</td>
