@@ -2,6 +2,7 @@ package th.co.food.dto;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -30,7 +31,20 @@ public class FoodBillDTO  extends BaseDTO implements Serializable {
 	@XStreamAlias("fbTotalQuantity")
 	private Integer fbTotalQuantity;
 
+	@XStreamAlias("fbStatus")
+	private String fbStatus;
 	 
+	@XStreamAlias("foodOrders") 
+	private FoodOrderDTO[] foodOrders;
+	
+	public String getFbStatus() {
+		return fbStatus;
+	}
+
+	public void setFbStatus(String fbStatus) {
+		this.fbStatus = fbStatus;
+	}
+
 	public Integer getFbId() {
 		return fbId;
 	}
@@ -77,6 +91,14 @@ public class FoodBillDTO  extends BaseDTO implements Serializable {
 
 	public void setFbTotalQuantity(Integer fbTotalQuantity) {
 		this.fbTotalQuantity = fbTotalQuantity;
+	}
+
+	public FoodOrderDTO[] getFoodOrders() {
+		return foodOrders;
+	}
+
+	public void setFoodOrders(FoodOrderDTO[] foodOrders) {
+		this.foodOrders = foodOrders;
 	}
    
 }
