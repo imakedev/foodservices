@@ -8,10 +8,20 @@
     <!-- intro - for the test on index.html  -->
     <create creator="new" javascript="FoodAjax">
       <param name="class" value="th.co.food.web.ajax.FoodAjax"/>
-    </create>
-
-     <convert converter="exception" match="java.lang.Exception"/>
+    </create> 
+    <convert converter="exception" match="java.lang.Exception"/>
     <convert converter="bean" match="java.lang.StackTraceElement"/>
-    <convert converter="bean" match="th.co.food.dto.FoodMenuDTO"/> 
+
+    <convert converter="bean" match="th.co.food.dto.FoodMenuDTO"/>
+    <convert converter="bean" match="th.co.food.dto.FoodCustomerDTO"/> 
+    <convert converter="bean" match="th.co.food.dto.BaseDTO"/> 
+    <convert converter="bean" match="th.co.food.dto.FoodBillDTO"/>
+    <convert converter="bean" match="th.co.food.dto.FoodOrderDTO"/>
+    <convert converter="bean" match="th.co.food.dto.ResultDTO"/>
+    <convert converter="bean" match="th.co.food.dto.ResultMessage"/>  
+    <convert converter="collection" match="java.util.Collection"/>
+    <convert converter="collection" match="java.util.List"/>
+    <convert converter="collection" match="java.util.arraylist"/>
+    
   </allow>
 </dwr>

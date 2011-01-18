@@ -3,7 +3,10 @@ package th.co.food.web.ajax;
 import java.util.ArrayList;
 import java.util.List;
 
+import th.co.food.dto.FoodBillDTO;
+import th.co.food.dto.FoodCustomerDTO;
 import th.co.food.dto.FoodMenuDTO;
+import th.co.food.dto.FoodOrderDTO;
 import th.co.food.web.service.FoodService;
 import th.co.food.web.service.impl.FoodServiceImpl;
  
@@ -19,27 +22,36 @@ public class FoodAjax {
 	public FoodAjax() {
 		this.foodService =  new FoodServiceImpl();
 	}
-	public List getMenuList(FoodMenuDTO foodMenuDTO ){
-	//	FoodMenuDTO foodMenuDTO =new FoodMenuDTO();
-	//	foodMenuDTO.setFmStatus("1");
-		//return foodService.getFoodMenu(foodMenuDTO);
-		 
-		List list = new ArrayList();
-		for (int i = 0; i <5; i++) {
-			FoodMenuDTO f1 =new FoodMenuDTO();
-			f1.setFmCalories(1f+i);
-			f1.setFmDetail("menu Detail "+(i+1));
-			f1.setFmName("menu Name "+(i+1));
-			f1.setFmId(i+1);
-			f1.setFmPrice(100f+i);
-			f1.setFmPicturePath("http://localhost:8081/pic1.jpg");
-			list.add(f1);
-		}
-		return list;
-		
-		//return null;
+	public List getMenuList(FoodMenuDTO foodMenuDTO ){ 
+		return foodService.getFoodMenu(foodMenuDTO); 
 	}
-	
+	public List getOrdersList(FoodOrderDTO foodOrderDTO ){
+	    return foodService.getFoodOrders(foodOrderDTO);
+	}
+	public void orderMenus(FoodBillDTO foodBillDTO){	
+		//System.out.println(foodBillDTO.getListObj().toArray());
+		FoodOrderDTO[] list = foodBillDTO.getFoodOrders();
+		if(list!=null && list.length>0){
+			int size = list.length;
+			for(int i=0;i<size;i++){	
+				FoodOrderDTO foodOrderDTO =list[i];
+			FoodMenuDTO foodMenuDTO = foodOrderDTO.getFoodMenuDTO();
+			System.out.println(foodMenuDTO);
+			}
+		}
+		foodService.orderMenus(foodBillDTO);
+	}
+	public String setMenuStatus(FoodMenuDTO foodMenuDTO){
+		foodService.setMenuStatus(foodMenuDTO);
+		return "ok";
+	}
+	public String addCustomer(FoodCustomerDTO foodCustomerDTO){
+		foodService.addCustomer(foodCustomerDTO);
+		return "ok";
+	}
+	public List getCustomer(FoodCustomerDTO foodCustomerDTO){	 
+		return foodService.getCustomer(foodCustomerDTO);
+	}
 	public static void main(String[] args) {
 		
 		FoodAjax personalImpl = new FoodAjax();
@@ -47,7 +59,39 @@ public class FoodAjax {
 		
 	   //ntcPersonal.setNppUserId("10416");
 	   // ntcPersonal.setServiceName(ServiceConstant.NTC_PERSONAL_PICTURE_SEARCH);
-	    personalImpl.SearchPersonal("10416");
+	  //  personalImpl.SearchPersonal("10416");
+		FoodBillDTO foodBillDTO = new FoodBillDTO();
+		foodBillDTO.setServiceName("orderMenus");
+		foodBillDTO.setFbTotalCalories(200f);
+		foodBillDTO.setFbTotalPrice(500f);
+		foodBillDTO.setFbTotalQuantity(2);
+		ArrayList list =new ArrayList();
+		FoodOrderDTO foodOrderDTO1 =new FoodOrderDTO();
+		foodOrderDTO1.setFoodBillDTO(foodBillDTO);
+		foodOrderDTO1.setFoQuantity(1);
+	//	foodOrderDTO1.setFoPhoneNumber("015482543");
+		foodOrderDTO1.setFoTotalCalories(50f);
+		foodOrderDTO1.setFoTotalPrice(250f);
+		
+		FoodOrderDTO foodOrderDTO2 =new FoodOrderDTO();
+		foodOrderDTO2.setFoodBillDTO(foodBillDTO);
+		foodOrderDTO2.setFoQuantity(1);
+	//	foodOrderDTO2.setFoPhoneNumber("015482543");
+		foodOrderDTO2.setFoTotalCalories(150f);
+		foodOrderDTO2.setFoTotalPrice(250f);
+		// food menu1 and menu2
+		FoodMenuDTO foodMenuDTO1 = new FoodMenuDTO();
+		foodMenuDTO1.setFmId(new Integer(1));
+		FoodMenuDTO foodMenuDTO2 = new FoodMenuDTO();
+		foodMenuDTO2.setFmId(new Integer(2));
+		
+		// set menu1
+		foodOrderDTO1.setFoodMenuDTO(foodMenuDTO1);
+		foodOrderDTO2.setFoodMenuDTO(foodMenuDTO2);
+		list.add(foodOrderDTO1);
+		list.add(foodOrderDTO2);
+		foodBillDTO.setListObj(list);
+		personalImpl.orderMenus(foodBillDTO);
 		
 	}
 	

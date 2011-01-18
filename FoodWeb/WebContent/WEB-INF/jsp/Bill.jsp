@@ -3,11 +3,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
+<script type="text/javascript"
+        src='<%= request.getContextPath()%>/dwr/interface/FoodAjax.js'> 
+</script>
+<script type="text/javascript"
+        src='<%= request.getContextPath() %>/dwr/engine.js'> 
+</script>
+<script type="text/javascript"
+        src='<%= request.getContextPath() %>/dwr/util.js'>
+</script>
+<script type="text/javascript">
+function getFoodBills(foodBillDto){
+	//alert(userId);
+ 
+	FoodAjax.getMenuList(foodDto,handleSelectFoodBill);
+	//alert(userId);
+}
+function handleSelectFoodBill(dataList){
+//	alert(dataList[0].fmDetail);
+}
+</script>
+<title>Food Bill</title>
 </head>
 
 <body>
-<table width="200" border="1" background="พื้นหลัง.jpg">
+<table width="200" border="1" background="image/bg.jpg">
   <tr>
     <td><img src="title1.jpg" width="1024" height="195" /></td>
   </tr>
@@ -76,5 +96,11 @@
   </tr>
 <tr></tr>
 </table>
+<script>
+var foodBillDto ={
+		fbStatus:"1"
+};
+getFoodBills(foodBillDto);
+</script>
 </body>
 </html>
