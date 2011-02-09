@@ -1,6 +1,8 @@
 package th.co.food.dto;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Random;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
@@ -97,5 +99,17 @@ public class FoodMenuDTO extends BaseDTO  implements Serializable {
 		this.fmStatus = fmStatus;
 	}
 
-	
+	public static void main(String[] args) {
+		//1295519275040
+		/*for(int i=0;i<5;i++){
+			Calendar calendar = Calendar.getInstance();
+
+			// get a java.util.Date from the calendar instance.
+			// this date will represent the current instant, or "now".
+			//calendar.getTimeInMillis();
+			System.out.println(calendar.getTimeInMillis());
+		
+		}*/
+		
+	}
  }

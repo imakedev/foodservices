@@ -2,7 +2,6 @@ package th.co.food.dto;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Date;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -36,6 +35,24 @@ public class FoodBillDTO  extends BaseDTO implements Serializable {
 	 
 	@XStreamAlias("foodOrders") 
 	private FoodOrderDTO[] foodOrders;
+	
+	@XStreamAlias("foodCustomer")
+	private FoodCustomerDTO foodCustomerDTO;
+	
+	@XStreamAlias("fbComplete")
+	private String fbComplete;
+	
+	@XStreamAlias("fbDate")
+	private String fbDate;
+	
+	@XStreamAlias("fbMonth")
+	private String fbMonth;
+	
+	@XStreamAlias("fbFullYear")
+	private String fbFullYear;
+	
+	@XStreamAlias("fbBillDateStr")
+	private String fbBillDateStr;
 	
 	public String getFbStatus() {
 		return fbStatus;
@@ -100,5 +117,54 @@ public class FoodBillDTO  extends BaseDTO implements Serializable {
 	public void setFoodOrders(FoodOrderDTO[] foodOrders) {
 		this.foodOrders = foodOrders;
 	}
+
+	public FoodCustomerDTO getFoodCustomerDTO() {
+		return foodCustomerDTO;
+	}
+
+	public void setFoodCustomerDTO(FoodCustomerDTO foodCustomerDTO) {
+		this.foodCustomerDTO = foodCustomerDTO;
+	}
+
+	public String getFbComplete() {
+		return fbComplete;
+	}
+
+	public void setFbComplete(String fbComplete) {
+		this.fbComplete = fbComplete;
+	}
+
+	public String getFbDate() {
+		return fbDate;
+	}
+
+	public void setFbDate(String fbDate) {
+		this.fbDate = fbDate;
+	}
+
+	public String getFbMonth() {
+		return fbMonth;
+	}
+
+	public void setFbMonth(String fbMonth) {
+		this.fbMonth = fbMonth;
+	}
+
+	public String getFbFullYear() {
+		return fbFullYear;
+	}
+
+	public void setFbFullYear(String fbFullYear) {
+		this.fbFullYear = fbFullYear;
+	}
+
+	public String getFbBillDateStr() {
+		return fbBillDateStr;
+	}
+
+	public void setFbBillDateStr(String fbBillDateStr) {
+		this.fbBillDateStr = fbBillDateStr;
+	}
+	
    
 }

@@ -16,8 +16,8 @@ public interface FoodService {
 	public FoodMenu findFoodMenuById(Integer fmId) ; 
 	public FoodOrder findFoodOrderById(Integer foId);  
 	public Integer saveFoodBill(FoodBill transientInstance); 	
-	public Integer saveFoodMenu(FoodBill transientInstance); 
-	public Integer saveFoodOrder(FoodBill transientInstance); 
+	public Integer saveFoodMenu(FoodMenu transientInstance); 
+	public Integer saveFoodOrder(FoodOrder transientInstance); 
 	public Integer saveFoodCustomer(FoodCustomer transientInstance); 
 	public List searchFoodBill(FoodBill instance); 
 	public List searchFoodMenu(FoodMenu instance);
@@ -27,6 +27,13 @@ public interface FoodService {
 	public int updateFoodMenu(FoodMenu transientInstance);	 
 	public int updateFoodOrder(FoodOrder transientInstance); 
 	
-	public void orderMenus(FoodBill foodBill,ArrayList foodOrders);
+	public Integer orderMenus(FoodBill foodBill,ArrayList foodOrders);
 	public void setMenuStatus(FoodMenu persistentInstance);
+	public void setOrderStatus(Integer[] foIds,String foStatus);
+	public void setBillStatus(Integer fbId,String fbStatus,String fbComplete,Integer fcId );
+	public void charge(Integer fcId,Float fcMoney);
+	public void topUp(FoodCustomer persistentInstance);
+	public List listBillComplete(FoodBill instance); 
+	public List listBillSummarry(FoodBill instance);
+	public List test(FoodBill foodBill);
 }

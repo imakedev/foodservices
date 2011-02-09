@@ -51,6 +51,8 @@ public class FoodOrder implements Serializable {
 
 	@Column(name="FO_STATUS")
 	private String foStatus;
+	
+
 	//bi-directional many-to-one association to FoodBill
     @ManyToOne
 	@JoinColumn(name="FB_ID")
@@ -62,9 +64,7 @@ public class FoodOrder implements Serializable {
 	private FoodMenu foodMenu;
     
   //bi-directional many-to-one association to FoodMenu
-    @ManyToOne
-	@JoinColumn(name="FC_ID")
-	private FoodCustomer foodCustomer;
+   
 
 	public Integer getFoId() {
 		return foId;
@@ -137,14 +137,7 @@ public class FoodOrder implements Serializable {
 	public void setFoodMenu(FoodMenu foodMenu) {
 		this.foodMenu = foodMenu;
 	}
-
-	public FoodCustomer getFoodCustomer() {
-		return foodCustomer;
-	}
-
-	public void setFoodCustomer(FoodCustomer foodCustomer) {
-		this.foodCustomer = foodCustomer;
-	}
+ 
 
 	public String getFoStatus() {
 		return foStatus;
@@ -153,6 +146,8 @@ public class FoodOrder implements Serializable {
 	public void setFoStatus(String foStatus) {
 		this.foStatus = foStatus;
 	}
+
+ 
 
     
 }
