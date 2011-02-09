@@ -12,7 +12,28 @@
         src='<%= request.getContextPath() %>/dwr/util.js'>
 </script>
 <script>
+var context_path="<%=request.getContextPath()%>";
+function goPage(_page){
+	//alert(context_path)
+	window.location.href=context_path+"/AdminServlet?page="+_page;
+	//window.location.assign(context_path+"/AdminServlet?page="+_page);
+} 
+
+function getFoodMenusAll(){
+	getFoodMenus("0");
+	getFoodMenus("1");	
+	// setTimeout("getFoodMenusAll()",10000) ;
+}
 var menuCountSelected=0;
+function deleteMenu(id){
+	var menuDto={fmId:id};
+	FoodAjax.deleteMenu(menuDto,{
+		 callback:function(dataStatus) {
+			 getFoodMenus("0");
+			// getFoodMenus("1");			 
+       }
+	});
+}
 function setFoodMenusStatus(id,status){
 	//alert("menu Seclected="+menuCountSelected)
 	if(menuCountSelected>=5 && status=='1'){
@@ -59,12 +80,12 @@ function getFoodMenus(status){
 				             "</div></td>"+
 				            "<td width=\"100\" align=\"center\" valign=\"top\" bgcolor=\"#CCCCFF\">"+
 				            "<div align=\"center\">"+
-				             "<input type=\"button\" name=\"แก้ไขเมนูอาหาร\" id=\"แก้ไขเมนูอาหาร\" value=\"แก้ไขเมนู\" />"+
+				             "<input type=\"button\" name=\"แก้ไขเมนูอาหาร\" id=\"แก้ไขเมนูอาหาร\" value=\"แก้ไขเมนู\" onclick=\"goPage('addmenu_bk&fmid="+dataFromServer[i].fmId+"')\"/>"+
 				              "</div></td>"+
-				          //  "<td width=\"100\" align=\"center\" valign=\"top\" bgcolor=\"#CCCCFF\">"+
-				            //  "<div align=\"center\">"+
-				             //   "<input type=\"button\" name=\"ยกเลิกเมนูอาหาร\" id=\"ยกเลิกเมนูอาหาร\" value=\"ยกเลิกเมนู\" onClick=\"setFoodMenusStatus('"+dataFromServer[i].fmId+"','0')\" />"+
-				           //     "</div></td>"+
+				             "<td width=\"100\" align=\"center\" valign=\"top\" bgcolor=\"#CCCCFF\">"+
+				              "<div align=\"center\">"+
+				                "<input type=\"button\" name=\"ลบเมนูอาหาร\" id=\"ลบเมนูอาหาร\" value=\"ลบเมนูอาหาร\" onClick=\"deleteMenu('"+dataFromServer[i].fmId+"')\" />"+
+				               "</div></td>"+
 				          "</tr>";
 		            	}		         
 		            str=str+"</table>"; 
@@ -215,28 +236,26 @@ body {
   </tr>
   <tr>
     <td width="331"><div align="center">
-      <form id="form1" name="form1" method="post" action="">
+
         <label><br />
         </label>
-      </form>
+
       </div></td>
     <td width="181"><div align="center">
-      <input type="submit" name="button" id="button" value="ทำการจัดการเมนูอาหาร" />
+      <input type="button" name="button" id="button" value="ทำการจัดการเมนูอาหาร"  onclick="goPage('menu_bk')"/>
     </div></td>
     <td width="187"><div align="center">
-      <form id="form2" name="form2" method="post" action="">
+       
         <label>
-          <input type="submit" name="button2" id="button2" value="เพิ่มรายการอาหาร" />
+          <input type="button" name="button2" id="button2" value="เพิ่มรายการอาหาร"  onclick="goPage('addmenu_bk')"/>
           </label>
-      </form>
+
       </div></td>
     <td width="325">&nbsp;</td>
   </tr>
 </table>
 <script>
-getFoodMenus("0");
-getFoodMenus("1");
-
+getFoodMenusAll();
 </script>
 </body>
 </html>

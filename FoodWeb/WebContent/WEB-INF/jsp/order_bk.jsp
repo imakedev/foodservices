@@ -12,6 +12,17 @@
         src='<%= request.getContextPath() %>/dwr/util.js'>
 </script>
 <script>
+var context_path="<%=request.getContextPath()%>";
+function goPage(_page){
+	//alert(context_path)
+	//window.open(URL,name,specs,replace);
+	// window.location.assign(context_path+"/AdminServlet?page="+_page);
+//	 window.open("'"+context_path+"/AdminServlet?page="+_page+"'",'target=_blank','','');
+//,width=500,height=500
+	var testwindow= window.open ("AdminServlet?page="+_page, 'mywindow',
+	'location=1,status=1,scrollbars=1,toolbar =1,menubar =1,resizable =1,titlebar =1');
+	testwindow.moveTo(0,0);
+} 
 var menuSelectedId;
 function getFoodMenus(foodDto){
 	//alert(userId);
@@ -23,37 +34,39 @@ function orderMenus(){
 	var totalPrice = document.getElementById('totalPrice');
 	var totalCalories = document.getElementById('totalCalories');
 	var totalQuantity =document.getElementById("totalQuantity");
-	var customerCode = document.getElementById("customerCode");
+	//var customerCode = document.getElementById("customerCode");
 	var menusIdSelectedArray = document.getElementsByName("menusIdSelected");
 	var menusNameSelectedArray = document.getElementsByName("menusNameSelected");
 	var menusQuantitySelectedArray = document.getElementsByName("menusQuantitySelected");
 	var menusPriceSelectedArray = document.getElementsByName("menusPriceSelected");
 	var menusCaloriesSelectedArray = document.getElementsByName("menusCaloriesSelected");	
 	if(menusIdSelectedArray!=null && menusIdSelectedArray.length>0){
+		/*
 		var customerDto = {fcId:customerCode.value}
 		FoodAjax.getCustomer(customerDto,{
 			callback:function(dataFromServerCust){
 				if(dataFromServerCust!=null && dataFromServerCust.length>0){
+					*/
 					var totalPriceValue = parseFloat(totalPrice.value)
-					alert("totalPriceValue="+totalPriceValue+",dataFromServerCust[0].fcMoney="+dataFromServerCust[0].fcMoney)
-					if(dataFromServerCust[0].fcMoney>totalPriceValue){
+					//alert("totalPriceValue="+totalPriceValue+",dataFromServerCust[0].fcMoney="+dataFromServerCust[0].fcMoney)
+					//if(dataFromServerCust[0].fcMoney>totalPriceValue){
 						var foodOrders =new Array();
 						for(var i=0 ;i<menusIdSelectedArray.length;i++){
 							var foodMenuDTO={
 									fmId:menusIdSelectedArray[i].value 
 							};
-							var foodCustomerDTO={fcId:customerCode.value};
+							//var foodCustomerDTO={fcId:customerCode.value};
 							var foodOrderDTO ={
 									foQuantity:menusQuantitySelectedArray[i].value,
 					 				foTotalCalories:menusCaloriesSelectedArray[i].value,
 					 				foTotalPrice:menusPriceSelectedArray[i].value,
 					 				foStatus:"0",
-					 				foodMenuDTO:foodMenuDTO,
-					 				foodCustomerDTO:foodCustomerDTO
+					 				foodMenuDTO:foodMenuDTO
+					 			//	foodCustomerDTO:foodCustomerDTO
 							};
 							foodOrders[i] = foodOrderDTO;
 						}
-						alert(foodOrders[0].foTotalPrice) 
+					//	alert(foodOrders[0].foTotalPrice) 
 						var foodBillDTO ={ 
 							foodOrders:foodOrders,
 								fbTotalCalories:totalCalories.value,
@@ -64,18 +77,27 @@ function orderMenus(){
 					 
 						FoodAjax.orderMenus(foodBillDTO,{
 							 callback:function(dataFromServer) {
-								 alert(" สั่งอาหารเรียบร้อยค่ะ ")
+								 if(dataFromServer!=null){
+									 alert(" สั่งอาหารเรียบร้อยค่ะ ")
+									 selectMenu('delAll','0')
+								//	goPage('cash_bk&fbid='+dataFromServer.fbId);
+							 	}
 							 }
 						});
+						/*
 					}else{
 						alert(" จำนวนเงินไม่พอจ่ายค่ะ กรุณาเติมเงิน ")
 					}
-				}else{
+					*/
+			//	}
+				/*
+				else{
 					alert(" รหัสลูกค้าไม่ถูกต้อง ")
 				}
+				*/
 				
-			}
-		});
+		//	}
+		//});
 	}else{
 		alert(" เลือกเมนูที่ต้องการค่ะ " )
 	}
@@ -246,10 +268,10 @@ function selectMenu(_mode,_fmId){
         		"<td height=\"23\" bgcolor=\"#FFFFCC\">&nbsp;</td>"+
         		"<td bgcolor=\"#FFFFCC\">&nbsp;</td>"+
 				"<td bgcolor=\"#FFFFCC\"><div align=\"center\"><strong>รวมเงิน</strong></div></td>"+
-				"<td bgcolor=\"#FFFFCC\">&nbsp;</td>"+
+				"<td bgcolor=\"#FFFFCC\" <div align=\"center\">&nbsp;<strong>"+totalPrice+" บาท</strong></div></td>"+
 				" <td bgcolor=\"#FFFFCC\"><div align=\"center\"><strong>"+
 				"<input type=\"hidden\" id=\"totalQuantity\" value=\""+totalQuantity+"\"/>"+
-				"<input type=\"hidden\" id=\"totalCalories\" value=\""+totalCalories+"\"/><input type=\"hidden\" id=\"totalPrice\" value=\""+totalPrice+"\"/>"+totalPrice+" บาท</strong></div></td>"+ 
+				"<input type=\"hidden\" id=\"totalCalories\" value=\""+totalCalories+"\"/><input type=\"hidden\" id=\"totalPrice\" value=\""+totalPrice+"\"/></strong></div></td>"+ 
 				"</tr></table>";
     	document.getElementById("menuDiv").innerHTML=str; 
     		} 
@@ -260,8 +282,8 @@ function selectMenu(_mode,_fmId){
 		"<td height=\"23\" bgcolor=\"#FFFFCC\">&nbsp;</td>"+
 		"<td bgcolor=\"#FFFFCC\">&nbsp;</td>"+
 		"<td bgcolor=\"#FFFFCC\"><div align=\"center\"><strong>รวมเงิน</strong></div></td>"+
-		"<td bgcolor=\"#FFFFCC\">&nbsp;</td>"+
-		" <td bgcolor=\"#FFFFCC\"><div align=\"center\"><strong><input type=\"hidden\" id=\"totalPrice\" value=\""+totalPrice+"\"/>"+totalPrice+" บาท</strong></div></td>"+ 
+		"<td bgcolor=\"#FFFFCC\"<div align=\"center\">&nbsp;<strong>"+totalPrice+" บาท</strong></div></td>"+
+		" <td bgcolor=\"#FFFFCC\"><div align=\"center\"><strong><input type=\"hidden\" id=\"totalPrice\" value=\""+totalPrice+"\"/></strong></div></td>"+ 
 		"</tr></table>"; 
 	   document.getElementById("menuDiv").innerHTML=str;
    }
@@ -384,6 +406,7 @@ body {
 
       </table></td>
     </tr>
+    <%--
     <tr>
       <td height="82"> 
       <table width="1028" height="20" border="1" cellpadding="0" cellspacing="0" bordercolor="#000000" bgcolor="#FFFFFF">
@@ -397,6 +420,7 @@ body {
        </table>
        </td>
        </tr>
+       --%>
     <tr>
       <td height="82">
       <div id="menuDiv"> 
