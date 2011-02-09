@@ -34,14 +34,18 @@ public class FoodOrderDTO  extends BaseDTO  implements Serializable {
 	@XStreamAlias("foStatus")
 	private String foStatus;
 	
+	 
+	
 	@XStreamAlias("foodBill")
-	private FoodBillDTO FoodBillDTO;
+	private FoodBillDTO foodBillDTO;
 
 	@XStreamAlias("foodMenu")
-	private FoodMenuDTO FoodMenuDTO;
+	private FoodMenuDTO foodMenuDTO;
 
-	@XStreamAlias("foodCustomer")
-	private FoodCustomerDTO foodCustomerDTO;
+	
+	
+	@XStreamAlias("foIds")
+	private Integer[] foIds;
 
 	public Integer getFoId() {
 		return foId;
@@ -99,30 +103,24 @@ public class FoodOrderDTO  extends BaseDTO  implements Serializable {
 		this.foTotalPrice = foTotalPrice;
 	}
 
+	 
 	public FoodBillDTO getFoodBillDTO() {
-		return FoodBillDTO;
+		return foodBillDTO;
 	}
 
 	public void setFoodBillDTO(FoodBillDTO foodBillDTO) {
-		FoodBillDTO = foodBillDTO;
+		this.foodBillDTO = foodBillDTO;
 	}
 
 	public FoodMenuDTO getFoodMenuDTO() {
-		return FoodMenuDTO;
+		return foodMenuDTO;
 	}
 
 	public void setFoodMenuDTO(FoodMenuDTO foodMenuDTO) {
-		FoodMenuDTO = foodMenuDTO;
+		this.foodMenuDTO = foodMenuDTO;
 	}
 
-	public FoodCustomerDTO getFoodCustomerDTO() {
-		return foodCustomerDTO;
-	}
-
-	public void setFoodCustomerDTO(FoodCustomerDTO foodCustomerDTO) {
-		this.foodCustomerDTO = foodCustomerDTO;
-	}
-
+ 
 	public String getFoStatus() {
 		return foStatus;
 	}
@@ -130,7 +128,16 @@ public class FoodOrderDTO  extends BaseDTO  implements Serializable {
 	public void setFoStatus(String foStatus) {
 		this.foStatus = foStatus;
 	}
-	
+
+	public Integer[] getFoIds() {
+		return foIds;
+	}
+
+	public void setFoIds(Integer[] foIds) {
+		this.foIds = foIds;
+	}
+
+ 
 	
 
 	 

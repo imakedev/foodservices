@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -46,7 +48,13 @@ public class FoodBill implements Serializable {
 
 	@Column(name="FB_STATUS")
 	private String fbStatus;
+ 
+	@Column(name="FB_COMPLETE")
+	private String fbComplete;
 	
+	@ManyToOne
+	@JoinColumn(name="FC_ID")
+	private FoodCustomer foodCustomer;
 	
 	public String getFbStatus() {
 		return fbStatus;
@@ -102,6 +110,22 @@ public class FoodBill implements Serializable {
 
 	public void setFbTotalQuantity(Integer fbTotalQuantity) {
 		this.fbTotalQuantity = fbTotalQuantity;
+	}
+
+	public FoodCustomer getFoodCustomer() {
+		return foodCustomer;
+	}
+
+	public void setFoodCustomer(FoodCustomer foodCustomer) {
+		this.foodCustomer = foodCustomer;
+	}
+
+	public String getFbComplete() {
+		return fbComplete;
+	}
+
+	public void setFbComplete(String fbComplete) {
+		this.fbComplete = fbComplete;
 	}
 	
 	
