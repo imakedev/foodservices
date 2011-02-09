@@ -54,6 +54,10 @@
 			<param-name>maxWaitAfterWrite</param-name>
 			<param-value>-1</param-value>
 		</init-param>
+		<init-param>
+			<param-name>fileUploadMaxBytes</param-name>
+			<param-value>10000</param-value>
+		</init-param>
 
 		<!-- For more information on these parameters, see: - http://getahead.org/dwr/server/servlet 
 			- http://getahead.org/dwr/reverse-ajax/configuration -->

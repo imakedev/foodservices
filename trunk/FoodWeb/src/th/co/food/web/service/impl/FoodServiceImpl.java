@@ -22,6 +22,24 @@ public class FoodServiceImpl extends FoodPostCommon implements FoodService {
 		th.co.food.dto.ResultMessage resultMessage =  (ResultMessage) postMessage(foodMenuDTO,foodMenuDTO.getClass(),foodMenuDTO.getClass(),"/foods",true);
 		return resultMessage.getResultDTO().getResultList();
 	}
+	public List searchFoodBill(FoodBillDTO foodBillDTO) {
+		// TODO Auto-generated method stub
+		//return null;
+		//foodBillDTO.setServiceName("searchFoodBill"); // searchFoodBill , searchFoodBillComplete 
+		th.co.food.dto.ResultMessage resultMessage =  (ResultMessage) postMessage(foodBillDTO,foodBillDTO.getClass(),foodBillDTO.getClass(),"/foods",true);
+		return resultMessage.getResultDTO().getResultList();
+	}
+	public FoodBillDTO getFoodBill(FoodBillDTO foodBillDTO) {
+		// TODO Auto-generated method stub
+		//return null;
+		foodBillDTO.setServiceName("getFoodBill");
+		th.co.food.dto.ResultMessage resultMessage =  (ResultMessage) postMessage(foodBillDTO,foodBillDTO.getClass(),foodBillDTO.getClass(),"/foods",true);
+		if(resultMessage.getResultDTO().getBaseDto()!=null)
+			return (FoodBillDTO)resultMessage.getResultDTO().getBaseDto();
+		else
+			return null;
+	}
+	
 	public List getFoodOrders(FoodOrderDTO foodOrderDTO){
 		foodOrderDTO.setServiceName("searchFoodOrder");
 		th.co.food.dto.ResultMessage resultMessage =  (ResultMessage) postMessage(foodOrderDTO,foodOrderDTO.getClass(),foodOrderDTO.getClass(),"/foods",true);
@@ -33,7 +51,7 @@ public class FoodServiceImpl extends FoodPostCommon implements FoodService {
 		return resultMessage.getResultDTO().getResultList();
 	}
 	
-	public void orderMenus(FoodBillDTO foodBillDTO) {
+	public FoodBillDTO orderMenus(FoodBillDTO foodBillDTO) {
 		// TODO Auto-generated method stub
 	//	ResultMessage resultMessage = new ResultMessage();
 		/*FoodMenuDTO foodMenuDTO =new FoodMenuDTO();
@@ -41,18 +59,67 @@ public class FoodServiceImpl extends FoodPostCommon implements FoodService {
 		//BaseDTO baseDTO = new BaseDTO();
 	//	foodMenuDTO.setListObj(foodMenus);
 		foodBillDTO.setServiceName("orderMenus");
-		postMessage(foodBillDTO,foodBillDTO.getClass(),foodBillDTO.getClass(),"/foods",false);
+		th.co.food.dto.ResultMessage resultMessage =  (ResultMessage) postMessage(foodBillDTO,foodBillDTO.getClass(),foodBillDTO.getClass(),"/foods",true);
+		if(resultMessage.getResultDTO().getBaseDto()!=null)
+			return (FoodBillDTO)resultMessage.getResultDTO().getBaseDto();
+		else
+			return null;
+	}
+	public void charge(FoodCustomerDTO foodCustomerDTO){
+		foodCustomerDTO.setServiceName("charge");
+		postMessage(foodCustomerDTO,foodCustomerDTO.getClass(),foodCustomerDTO.getClass(),"/foods",false);
 	}
 	public void setMenuStatus(FoodMenuDTO foodMenuDTO) {
 		// TODO Auto-generated method stub
 		foodMenuDTO.setServiceName("setMenuStatus");
 		postMessage(foodMenuDTO,foodMenuDTO.getClass(),foodMenuDTO.getClass(),"/foods",false);
 	}
+	public void setOrderStatus (FoodOrderDTO foodOrderDTO){
+		// TODO Auto-generated method stub
+		foodOrderDTO.setServiceName("setOrderStatus");
+		postMessage(foodOrderDTO,foodOrderDTO.getClass(),foodOrderDTO.getClass(),"/foods",false);
+	}
+	public void setBillStatus(FoodBillDTO foodBillDTO){
+		foodBillDTO.setServiceName("setBillStatus");
+		postMessage(foodBillDTO,foodBillDTO.getClass(),foodBillDTO.getClass(),"/foods",false);
+	}
 	public void addCustomer(FoodCustomerDTO foodCustomerDTO) {
 		// TODO Auto-generated method stub
 		foodCustomerDTO.setServiceName("addCustomer");
 		postMessage(foodCustomerDTO,foodCustomerDTO.getClass(),foodCustomerDTO.getClass(),"/foods",false);
 	}
+	public void deleteMenu(FoodMenuDTO foodMenuDTO){
+		foodMenuDTO.setServiceName("deleteMenu");
+		postMessage(foodMenuDTO,foodMenuDTO.getClass(),foodMenuDTO.getClass(),"/foods",false);
+	}
+	public void topUp(FoodCustomerDTO foodCustomerDTO){
+		foodCustomerDTO.setServiceName("topUp");
+		postMessage(foodCustomerDTO,foodCustomerDTO.getClass(),foodCustomerDTO.getClass(),"/foods",false);
+	}
+	public FoodMenuDTO addOrEditFoodMenu(FoodMenuDTO foodMenuDTO){
+		foodMenuDTO.setServiceName("addOrEditFoodMenu");
+		th.co.food.dto.ResultMessage resultMessage =  (ResultMessage) postMessage(foodMenuDTO,foodMenuDTO.getClass(),foodMenuDTO.getClass(),"/foods",true);
+		if(resultMessage.getResultDTO().getBaseDto()!=null)
+			return (FoodMenuDTO)resultMessage.getResultDTO().getBaseDto();
+		else
+			return null;
+	}
+	public List listBillComplete(FoodBillDTO foodBillDTO){
+		foodBillDTO.setServiceName("listBillComplete");
+		th.co.food.dto.ResultMessage resultMessage =  (ResultMessage) postMessage(foodBillDTO,foodBillDTO.getClass(),foodBillDTO.getClass(),"/foods",true);
+		return resultMessage.getResultDTO().getResultList();
+	}
+	public List listBillSummarry(FoodBillDTO foodBillDTO){
+		foodBillDTO.setServiceName("listBillSummarry");
+		th.co.food.dto.ResultMessage resultMessage =  (ResultMessage) postMessage(foodBillDTO,foodBillDTO.getClass(),foodBillDTO.getClass(),"/foods",true);
+		return resultMessage.getResultDTO().getResultList();
+	}
+	/*public List listBillComplete(FoodBillDTO foodBillDTO){
+		foodBillDTO.setServiceName("listBillComplete");
+		th.co.food.dto.ResultMessage resultMessage =  (ResultMessage) postMessage(foodBillDTO,foodBillDTO.getClass(),foodBillDTO.getClass(),"/foods",true);
+		return resultMessage.getResultDTO().getResultList();
+	
+	}*/
 	/*
 
 	public int addNtcFaq(NtcFaq ntcFaq) {
